@@ -1,0 +1,122 @@
+Task : Create a custom annotation which calculate a method execution time (how much time has been taken to  execute method)
+
+Q. What is an annotation in Java?
+
+Annotation is basically an interface that act as a tag for the class, method, field or constructor.
+They provide metadata.
+Frameworks can perform operations based on the annotation provided.
+Eg. -> @Override , @Deprecated
+
+
+
+Q. Why do we need custom annotations?
+
+To provide our own logic implementations.
+To make frameworks like spring
+Used in AOP too.
+
+
+
+Q. What is the difference between built-in annotations and custom annotations?
+
+Built-in annotations already have meaning defined by Java.
+Custom annotations need logic written using Reflection or AOP.
+
+
+
+Q. Which package is required to create annotations in Java?
+
+java.lang.annotation.*;
+
+
+
+Q. What does @interface mean?
+
+It represents as an Annotation , Java internally treats 
+public @interface MyCustomAnnotation as 
+public interface MyCustomAnnotation extends Annotation .
+(Here Annotation class belongs to java.lang.annotation.Annotation)
+
+
+
+
+Q. What is @Retention? Name its types.
+
+It define when Annotation is available.
+Types :
+(i) : SOURCE -> removed after compilation
+(ii) : CLASS -> Stored in .class file
+(iii) : RUNTIME -> available via Reflection(Used in Spring)
+
+
+
+
+Q. What is @Target? Why is it important?
+
+It define where Annotation can be used.
+Types :
+METHOD
+FIELD
+TYPE
+PARAMETER
+CONSTRUCTOR
+ANNOTATION_TYPE
+LOCAL_VARIABLE
+PACKAGE
+TYPE_PARAMETER
+TYPE_USE
+
+
+
+
+Q. What is the default retention policy of an annotation?
+
+"RetentionPolicy.CLASS" (Not available via Reflection at Runtime)
+
+
+
+
+Q. Can an annotation have methods? Explain.
+
+
+Yes , but they are not normal methods , they are the parameters (configurable fields)
+
+Because internally:
+
+"public @interface Author" is actually:
+
+"public interface Author extends Annotation"
+
+And interfaces contain methods.
+
+So annotation attributes are actually abstract methods.
+
+-> Properties :
+
+	They cannot have method body.
+	Cannot throw exceptions.
+	Cannot have parameters.
+	Can have default values.
+	Special element: value()
+
+-> Example:
+
+	public @interface Role {
+	    String value();
+	}
+
+	Usage: @Role("ADMIN")
+	No need to write "value ="
+
+
+
+
+
+Q. What data types are allowed in annotation elements?
+
+
+Primitive types (int, boolean, etc.)
+
+String, Class, Enum, Annotation
+
+Array of above
